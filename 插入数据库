@@ -1,0 +1,37 @@
+//mysql标准语句
+INSERT INTO table_name (列1, 列2,...) VALUES (值1, 值2,....)
+
+
+//php版本
+<?php
+try{
+    $pdo = new \PDO("mysql:host=192.168.1.250;dbname=liu","root","123456");
+}catch (PDOException $e) {
+    die('Connection failed: ' . $e->getMessage());
+}
+$pdo->exec('set names utf8');
+$result = $pdo->exec('insert into Persons (LastName,FirstName,Address,City) values ("Gates", "Bill", "Xuanwumen 10", "Beijing")');
+echo 'hehe';
+//$result_arr = $result->fetchAll(); //直接转换成数组，不适用于大量数据
+
+
+//python版本
+import pymysql,sys
+if __name__ == "__main__":
+    try:
+        conn = pymysql.connect(user='root', passwd='123456',
+                                 host='192.168.1.250', db='liu', charset='utf8')
+    except Exception as e:
+        print('err = %s\n' % ( e))
+        sys.exit()
+    try:
+        with conn.cursor() as cursor:
+            # 执行sql语句，进行查询
+            sql = 'insert into Persons (LastName,FirstName,Address,City) values ("Gates", "Bill", "Xuanwumen 10", "Beijing")'
+            cursor.execute(sql)
+            # 获取查询结果
+            conn.commit()
+        # 没有设置默认自动提交，需要主动提交，以保存所执行的语句
+    finally:
+        cursor.close();
+        conn.close();
