@@ -1,0 +1,46 @@
+//mysql标准语句
+select * from tablename;
+
+//php版
+//
+//
+try{
+	$pdo = new \PDO("mysql:host=localhost;dbname=my_testdb","root","333221abc");
+}catch (PDOException $e) {
+	echo 'Connection failed: ' . $e->getMessage();
+}
+$pdo->exec('set names utf8');
+$result = $pdo->query("SELECT* FROM foo");
+while($row = $result->fetch()){
+	echo '<pre>';
+	print_r($row);
+	echo '</pre>';
+	}
+//$result_arr = $result->fetchAll(); //直接转换成数组，不适用于大量数据
+
+
+
+//python3版
+//
+//
+import pymysql,sys
+if __name__ == "__main__":
+    try:
+        conn = pymysql.connect(user='root', passwd='123456',
+                                 host='192.168.1.250', db='liu', charset='utf8')
+    except Exception as e:
+        print('err = %s\n' % ( e))
+        sys.exit()
+    try:
+        with conn.cursor() as cursor:
+            # 执行sql语句，进行查询
+            sql = 'select * from Persons'
+            cursor.execute(sql)
+            # 获取查询结果
+            while True:
+                re = cursor.fetchone()
+                if not re:
+                    break;
+                print(re);
+    finally:
+        conn.close();
