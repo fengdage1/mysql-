@@ -1,0 +1,38 @@
+//mysql 版本
+DELETE FROM 表名称 WHERE 列名称 = 值
+
+//php 版本
+//
+<?php
+try{
+    $pdo = new \PDO("mysql:host=192.168.1.250;dbname=liu","root","123456");
+}catch (PDOException $e) {
+    die('Connection failed: ' . $e->getMessage());
+}
+$pdo->exec('set names utf8');
+$result = $pdo->exec('delete from Persons where id=6');
+if(!$result){
+    echo 'delete error';
+}
+echo 'hehe';
+
+//python 版本
+//
+import pymysql,sys
+if __name__ == "__main__":
+    try:
+        conn = pymysql.connect(user='root', passwd='123456',
+                                 host='192.168.1.250', db='liu', charset='utf8')
+    except Exception as e:
+        print('err = %s\n' % ( e))
+        sys.exit()
+    try:
+        with conn.cursor() as cursor:
+            # 执行sql语句，进行查询
+            sql = 'delete from Persons where id=7'
+            cursor.execute(sql)
+            conn.commit()
+        # 没有设置默认自动提交，需要主动提交，以保存所执行的语句
+    finally:
+        cursor.close();
+        conn.close();
