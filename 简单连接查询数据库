@@ -10,8 +10,12 @@ select ucase(column1) as column1,ucase(column2) from table; //查询结果的值
 select lcase(column1) as column1,lcase(column2) from table; //查询结果的值转换成写写，只对字母有用
 select mid(column1,start,length) as column1,mid(column2,stert,length) from table; //提取查询结果,从start位开始，长度为length,length为可选，字母数字都有效
 select length(column1) as column1,length(column2) from table; //得到查询结果的长度
+select round(column1) as column1,round(column2) from table; //四舍五入小数部分(其实是舍入为最接近的数)，还可带小数位数保留，但是小数部分保留不是简单的四舍五入
+select avg(column1),now() as xxx from table; //xxx为追加的当前时间
+select avg(column1),date_format(now(),'%Y-%m-%d') as xxx from table; //xxx为追加的当前时间,格式化为%Y-%m-%d
 //还能混合函数使用
 select avg(column1),count(column2),max(column3),min(column4),sum(column5) from table; //大杂烩
+
 
 //函数查询带条件，用having
 select customer,sum(price) as ss from person group by customer having ss>1700 order by customer; //where不能和函数连用，得用having
