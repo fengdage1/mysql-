@@ -1,5 +1,23 @@
 //mysql标准语句
 select * from tablename;
+//函数使用
+select avg(column1),avg(column2) as xxx from table; //查某列平均值
+select count(column1),count(column2) from table; //查相应列记录条数
+select max(column1),max(column2) from table; //查看相应列的最大值
+select min(column1),min(column2) from table; //查看相应列的最小值
+select sum(column1),sum(column2) from table; //查看相应列的和
+select ucase(column1) as column1,ucase(column2) from table; //查询结果的值转换成大写，只对字母有用
+select lcase(column1) as column1,lcase(column2) from table; //查询结果的值转换成写写，只对字母有用
+select mid(column1,start,length) as column1,mid(column2,stert,length) from table; //提取查询结果,从start位开始，长度为length,length为可选，字母数字都有效
+select length(column1) as column1,length(column2) from table; //得到查询结果的长度
+//还能混合函数使用
+select avg(column1),count(column2),max(column3),min(column4),sum(column5) from table; //大杂烩
+
+//函数查询带条件，用having
+select customer,sum(price) as ss from person group by customer having ss>1700 order by customer; //where不能和函数连用，得用having
+
+
+
 
 //php版
 //
@@ -35,10 +53,10 @@ if __name__ == "__main__":
         with conn.cursor() as cursor:
             # 执行sql语句，进行查询
             sql = 'select * from Persons'
-            cursor.execute(sql)
+            count = cursor.execute(sql) //count 是查到的条数
             # 获取查询结果
             while True:
-                re = cursor.fetchone()
+                re = cursor.fetchone()  
                 if not re:
                     break;
                 print(re);
