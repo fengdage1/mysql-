@@ -1,0 +1,4 @@
+ALTER USER "root"@"localhost" IDENTIFIED  BY "你的密码";
+use mysql;
+update user set host='%' where user='root';
+FLUSH PRIVILEGES;
