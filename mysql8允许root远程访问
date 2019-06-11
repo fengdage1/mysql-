@@ -1,3 +1,5 @@
+先去 https://dev.mysql.com/downloads/repo/apt/ 下一个mysql-config.deb文件， dpkg -i 安装好
+
 ALTER USER "root"@"localhost" IDENTIFIED  BY "你的密码";
 use mysql;
 update user set host='%' where user='root';
